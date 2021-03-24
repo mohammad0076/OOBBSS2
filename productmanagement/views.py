@@ -1,3 +1,12 @@
 from django.shortcuts import render
+from .models import Books
 
-# Create your views here.
+def showbooks(request):
+
+    book = Books.objects.all()
+
+    context ={
+        'all_books': book
+    }
+    return render(request,'productmanagement/showbooks.html', context)
+
