@@ -1,9 +1,11 @@
 from django.shortcuts import render
+
+# Create your views here.
+from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
-from .froms import ProfileForm
+from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
-# Create your views here.
 
 
 def register(request):
@@ -35,11 +37,8 @@ def create_profile(request):
         profile = Profile.objects.get(user=request.user)
         form = ProfileForm({'contact_no':profile.contact_no,
                                      'full_name':profile.full_name,
-                                    'email': profile.email,
-                                    'pro_pic': profile.pro_pic,
-                                    'address': profile.address,
-
-                            })
+                                    'email': profile.email, 'district':profile.district,'city':profile.city,'postal_code':profile.postal_code,'street_address':profile.street_address,'house_no':profile.house_no
+                          })
 
     else:
 
@@ -60,7 +59,7 @@ def create_profile(request):
                 instance.save()
             else:
                 profile.contact_no = instance.contact_no
-                profile.pro_pic = instance.pro_pic
+
                 profile.save()
     context = {
         'form': form
@@ -69,21 +68,15 @@ def create_profile(request):
 
 
 @login_required
-
 def show_profile(request):
     try:
         profile = Profile.objects.get(user=request.user)
     except Profile.DoesNotExist:
-        profile = "Please complete your profile to view"
+        profile = "Please complete your profile "
 
     context = {
         'profile': profile
     }
 
     return render(request, 'usermanagement/showing_user_profile.html', context)
-
-
-
-
-
 
