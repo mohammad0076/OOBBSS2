@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from productmanagement import views as pviews
+from productmanagement import  views as pviews
 from django.conf import settings
 from django.conf.urls.static import static
 from usermanagement import views as uviews
@@ -28,8 +27,8 @@ urlpatterns =[
     path('registration/', uviews.register),
     path('accounts/', include('django.contrib.auth.urls')),
     path('create_profile/', uviews.create_profile),
-    path('show_profile/', uviews.show_profile)
-
+    path('show_profile/', uviews.show_profile),
+    path('upload_product/',pviews.upload_product_by_user, name='upload_product')
 ]
 
 

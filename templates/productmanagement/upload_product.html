@@ -1,0 +1,17 @@
+
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy }}
+
+        <input type="submit">
+    </form>
+
+    <a href="{% url 'book_list'%}">BOOK List </a>
+
+
+{% endblock content %}

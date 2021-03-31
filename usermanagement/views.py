@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 # Create your views here.
+
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from .forms import ProfileForm
