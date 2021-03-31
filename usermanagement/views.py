@@ -13,14 +13,14 @@ from .models import Profile
 def register(request):
 
     form = UserCreationForm()
-
-
     if request.method == "POST":
 
         form = UserCreationForm(request.POST)
         if form.is_valid():
 
             user = form.save()
+
+            return  redirect('book_list')
 
     context={
         'form' : form
@@ -63,6 +63,7 @@ def create_profile(request):
                 profile.contact_no = instance.contact_no
 
                 profile.save()
+            return redirect('book_list')
     context = {
         'form': form
     }

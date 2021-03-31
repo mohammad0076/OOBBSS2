@@ -49,8 +49,8 @@
         </li>
 
       </ul>
-      <form method="POST" action="{% url 'book_list' %}">
-                {% csrf_token %}
+                  <form method="POST" action="{% url 'book_list' %}">
+                 {% csrf_token %}
 
               <input  type="search" name="search">
 
