@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
      'crispy_forms',
-    'productmanagement.apps.ProductmanagementConfig',
+    #'productmanagement.apps.ProductmanagementConfig',
     'usermanagement.apps.UsermanagementConfig',
 
 

@@ -21,5 +21,5 @@ class Books (models.Model):
 
 
     def __str__(self):
-        return self.title + self.city
+        return self.title +     self.city
 

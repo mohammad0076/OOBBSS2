@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<form method="POST" action="{% url 'book_list' %}">
+        {% csrf_token %}
+
+      <input  type="search" name="search" hidden value="Smartphone">
+
+      <button  type="submit">Smartphone</button>
+    </form>
+{% for q in p %}
+
+
+
+        {% endfor %}
+    <br>
+
+    <form method="POST" action="{% url 'location' %}">
+        {% csrf_token %}
+
+      <input  type="search" name="search" hidden value="Laptop">
+
+      <button  type="submit">Laptop</button>
+    </form>
+{% endblock content %}

@@ -1,7 +1,12 @@
+from .models import Books
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
+from .forms import BooksForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
 # Create your views here.
-
+from django.contrib import admin
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
@@ -12,23 +17,17 @@ from .models import Profile
 from .models import User
 
 
-def register(request):
+def registers(request):
 
     form = UserCreationForm()
     if request.method == "POST":
 
+
         form = UserCreationForm(request.POST)
         if form.is_valid():
 
-
             user = form.save()
             if request.user.is_authenticated:
-
-
-
-
-
-
                 return  redirect('book_list')
 
     context={
@@ -41,6 +40,7 @@ def register(request):
 
 @login_required
 def create_profile(request):
+
 
     profile_list = Profile.objects.filter(user=request.user)
 
@@ -72,7 +72,10 @@ def create_profile(request):
                 profile.contact_no = instance.contact_no
 
                 profile.save()
+
                 return redirect('book_list')
+
+
     context = {
         'form': form
     }
@@ -93,3 +96,51 @@ def show_profile(request):
     }
     return render(request, 'usermanagement/showing_user_profile.html', context)
 
+
+def showbooks(request):
+
+
+    book = Books.objects.all()
+
+    if request.method == 'POST':
+
+
+        P = Books.objects.filter(category__icontains=request.POST['search'])
+        Q = Books.objects.filter(title__contains=request.POST['search'])
+        R = Books.objects.filter(author__icontains=request.POST['search'])
+
+        book = P | Q | R
+
+
+
+    context = {
+        'all_books': book
+    }
+    return render(request, 'productmanagement/showbooks.html', context)
+
+
+
+@login_required
+def upload_product_by_user(request):
+    form = BooksForm()
+    if request.method == "POST":
+        form = BooksForm(request.POST, request.FILES)
+        if form.is_valid:
+
+            form.save()
+
+
+            return redirect('book_list')
+
+
+
+    return render(request, 'productmanagement/upload_product.html', {'form': form})
+
+
+
+def ij(request):
+    d = Books.city
+    e = Profile.city
+    P = d | e
+
+    return render(request,'usermanagement/location_wise book.html',{'P': p })
