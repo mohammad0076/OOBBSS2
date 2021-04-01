@@ -9,6 +9,8 @@ from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 
+from .models import User
+
 
 def register(request):
 
@@ -18,9 +20,16 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
 
-            user = form.save()
 
-            return  redirect('book_list')
+            user = form.save()
+            if request.user.is_authenticated:
+
+
+
+
+
+
+                return  redirect('book_list')
 
     context={
         'form' : form
@@ -63,10 +72,12 @@ def create_profile(request):
                 profile.contact_no = instance.contact_no
 
                 profile.save()
-            return redirect('book_list')
+                return redirect('book_list')
     context = {
         'form': form
     }
+
+
     return render(request, 'usermanagement/creation_of_profile.html', context)
 
 
@@ -80,6 +91,5 @@ def show_profile(request):
     context = {
         'profile': profile
     }
-
     return render(request, 'usermanagement/showing_user_profile.html', context)
 

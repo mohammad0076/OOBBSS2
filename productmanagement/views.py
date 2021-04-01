@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
 from .models import Books
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
 from .forms import BooksForm
@@ -18,6 +19,8 @@ def showbooks(request):
 
         book = P | Q | R
 
+       
+
     context ={
         'all_books': book
              }
@@ -31,6 +34,10 @@ def upload_product_by_user(request):
         form = BooksForm( request.POST,request.FILES)
         if form.is_valid:
             form.save()
+
+
+
+
             return redirect('book_list')
 
     return  render (request,'productmanagement/upload_product.html',{'form':form })
